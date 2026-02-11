@@ -1,0 +1,146 @@
+/* Reset / sanity */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Main app wrapper */
+.app {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("bg3.png"); /* 👈 CHANGE THIS */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
+}
+
+
+/* Content card */
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  width: 100%;
+  max-width: 360px;
+  
+  /* Remove the padding/border if you want just the image, 
+     but KEEP the animation line below: */
+  
+  animation: popUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Text */
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+/* Button */
+button {
+  width: 100%;
+  min-height: 48px;
+
+  border: none;
+  border-radius: 12px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  background: #ff5fa2;
+  color: white;
+
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+@keyframes popUp {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1); /* Goes slightly bigger than normal (bounce) */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.image-box {
+  width: 100%;
+  height: auto;
+  display: block; /* Removes tiny gap at bottom of image */
+  border-radius: 12px;
+  /* Removed animation from here, since it's now on .content */
+}
+
+/* New style for the text field inside the image */
+.overlay-input {
+  position: absolute;
+  
+  /* Positioning: Centered by default */
+  top: 75.3%; 
+  left: 51%;
+  transform: translate(-50%, -50%);
+  
+  /* Size and Style */
+  width: 50%;       /* Adjust width as needed */
+  padding: 0.00001px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px; /* Pill shape */
+  outline: none;
+  text-align: center;
+  
+  /* Visual style */
+  background: rgba(255, 255, 255, 0.9); /* Slightly see-through white */
+  color: #333;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Shadow so it stands out */
+}
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px); /* Moves up slightly */
+  }
+  100% {
+    transform: translateY(0px);   /* Comes back down */
+  }
+}
+
+/* 2. The wrapper that applies the float */
+.floater {
+  position: relative; /* Keeps the input locked to the image */
+  width: 100%;
+  
+  /* Animation Breakdown:
+     - float: the name of the keyframe above
+     - 3s: takes 3 seconds to go up and down (slow & light)
+     - ease-in-out: starts slow, speeds up, ends slow (smooth)
+     - infinite: never stops
+  */
+  animation: float 3s ease-in-out infinite;
+}
